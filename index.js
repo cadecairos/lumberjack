@@ -48,11 +48,12 @@ var profile_properties = Object.keys(profile_update_map);
 var Contributor = function Contributor(profileData) {
   profileData = profileData || {};
 
+  this.lastActive = Date.now();
   this.firstContribution = profileData.firstContribution || null;
   this.latestContribution = profileData.latestContribution || null;
   this.contributor = !!profileData.contributor;
   this.eventHost = !!profileData.eventHost;
-  this.createdAt = profileData.createdAt || Date.now;
+  this.createdAt = profileData.createdAt || Date.now();
   this.deletedAt = profileData.deletedAt || null;
 };
 
@@ -62,7 +63,6 @@ Contributor.prototype.updateProfile = function(eventData) {
       profile_update_map[profile_prop].apply(this, eventData);
     }
   });
-  this.lastActive = Date.now();
 };
 
 Contributor.prototype.getData = function() {
