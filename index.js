@@ -21,7 +21,10 @@ var contribution_events = [
 
 var profile_update_map = {
   lastActive: function(eventData) {
-    this.lastActive = eventData.timestamp;
+    if (new Date(eventData.timestamp).valueOf() >
+        new Date(this.lastActive).valueOf()) {
+      this.lastActive = eventData.timestamp;
+    }
   },
   latestContribution: function(eventData) {
     if (contribution_events.indexOf(eventData.event_type) !== -1) {
