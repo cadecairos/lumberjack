@@ -26,6 +26,13 @@ var profile_update_map = {
       this.lastActive = eventData.timestamp;
     }
   },
+  firstContribution: function(eventData) {
+    if (contribution_events.indexOf(eventData.event_type) !== -1 &&
+        new Date(eventData.timestamp).valueOf() <
+        (this.firstContribution ? new Date(this.firstContribution).valueOf() : Date.now())) {
+      this.firstContribution = eventData.timestamp;
+    }
+  },
   latestContribution: function(eventData) {
     if (contribution_events.indexOf(eventData.event_type) !== -1) {
       this.latestContribution = Date.now();
@@ -34,7 +41,6 @@ var profile_update_map = {
   contributor: function(eventData) {
     if (!this.contributor && contribution_events.indexOf(eventData.event_type) !== -1) {
       this.contributor = true;
-      this.firstContribution = eventData.timestamp;
     }
   },
   eventHost: function(eventData) {
