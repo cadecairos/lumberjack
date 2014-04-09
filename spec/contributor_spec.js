@@ -41,10 +41,13 @@ JS.Test.describe('Profile', function() { with(this) {
   }});
 
   describe('updates', function() { with(this) {
-    it('updates lastActive', function() { with(this) {
-      var p = Profile({
+    before(function() { with(this) {
+      this.p = Profile({
         lastActive: "2014-01-01T00:00:00.000Z"
       });
+    }});
+
+    it('updates lastActive', function() { with(this) {
       p.updateProfile({
         event_type: "test",
         timestamp: "2014-01-01T01:00:00.000Z"
@@ -54,9 +57,6 @@ JS.Test.describe('Profile', function() { with(this) {
     }});
 
     it('updates lastActive if timestamp is newer', function() { with(this) {
-      var p = Profile({
-        lastActive: "2014-01-01T00:00:00.000Z"
-      });
       p.updateProfile({
         event_type: "test",
         timestamp: "2013-01-00T01:00:00.000Z"
