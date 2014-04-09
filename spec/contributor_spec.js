@@ -64,5 +64,14 @@ JS.Test.describe('Profile', function() { with(this) {
 
       assertEqual("2014-01-01T00:00:00.000Z", p.getData().lastActive);
     }});
+
+    it('updates firstContribution', function() { with(this) {
+      p.updateProfile({
+        event_type: "create_event",
+        timestamp: "2014-01-00T00:00:00.000Z"
+      });
+
+      assertEqual("2014-01-00T00:00:00.000Z", p.getData().firstContribution);
+    }});
   }});
 }});

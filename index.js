@@ -34,7 +34,7 @@ var profile_update_map = {
   contributor: function(eventData) {
     if (!this.contributor && contribution_events.indexOf(eventData.event_type) !== -1) {
       this.contributor = true;
-      this.firstContribution = Date.now();
+      this.firstContribution = eventData.timestamp;
     }
   },
   eventHost: function(eventData) {
