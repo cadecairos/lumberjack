@@ -48,12 +48,12 @@ var profile_properties = Object.keys(profile_update_map);
 var Contributor = function Contributor(profileData) {
   profileData = profileData || {};
 
-  this.firstContribution: profileData.firstContribution || null;
-  this.latestContribution: profileData.latestContribution || null;
-  this.contributor: !!profileData.contributor;
-  this.eventHost: !!profileData.eventHost;
-  this.createdAt: profileData.createdAt || Date.now;
-  this.deletedAt: profileData.deletedAt || null;
+  this.firstContribution = profileData.firstContribution || null;
+  this.latestContribution = profileData.latestContribution || null;
+  this.contributor = !!profileData.contributor;
+  this.eventHost = !!profileData.eventHost;
+  this.createdAt = profileData.createdAt || Date.now;
+  this.deletedAt = profileData.deletedAt || null;
 };
 
 Contributor.prototype.updateProfile = function(eventData) {
@@ -77,6 +77,6 @@ Contributor.prototype.getData = function() {
   };
 };
 
-module.exports = function() {
-  return new Contributor();
+module.exports = function(profileData) {
+  return new Contributor(profileData);
 };
