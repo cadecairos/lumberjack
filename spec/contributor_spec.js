@@ -11,8 +11,8 @@ JS.Test.describe('Profile', function() { with(this) {
         data = p.getData();
 
     it('Defaults lastActive', function() { with(this) {
-      assert(data.lastActive);
-      assert(typeof data.lastActive === "number");
+      assertNot(data.lastActive);
+      assertEqual(data.lastActive, null);
     }});
     it('Defaults firstContribution', function() { with(this) {
       assertNot(data.firstContribution);
@@ -37,6 +37,20 @@ JS.Test.describe('Profile', function() { with(this) {
     it('Defaults deletedAt', function() { with(this) {
       assertNot(data.deletedAt);
       assertEqual(data.deletedAt, null);
+    }});
+  }});
+
+  describe('updates', function() { with(this) {
+    it('updates lastActive', function() { with(this) {
+      var p = Profile({
+        lastActive: "2014-01-01T00:00:00.000Z"
+      });
+      p.updateProfile({
+        event_type: "test",
+        timestamp: "2014-01-01T01:00:00.000Z"
+      });
+
+      assertEqual("2014-01-01T01:00:00.000Z", p.getData().lastActive);
     }});
   }});
 }});

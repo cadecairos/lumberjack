@@ -20,6 +20,9 @@ var contribution_events = [
 ];
 
 var profile_update_map = {
+  lastActive: function(eventData) {
+    this.lastActive = eventData.timestamp;
+  },
   latestContribution: function(eventData) {
     if (contribution_events.indexOf(eventData.event_type) !== -1) {
       this.latestContribution = Date.now();
@@ -48,7 +51,7 @@ var profile_properties = Object.keys(profile_update_map);
 var Contributor = function Contributor(profileData) {
   profileData = profileData || {};
 
-  this.lastActive = Date.now();
+  this.lastActive = profileData.lastActive || null;
   this.firstContribution = profileData.firstContribution || null;
   this.latestContribution = profileData.latestContribution || null;
   this.contributor = !!profileData.contributor;
@@ -60,9 +63,9 @@ var Contributor = function Contributor(profileData) {
 Contributor.prototype.updateProfile = function(eventData) {
   profile_properties.forEach(function(profile_prop) {
     if ( profile_update_map.hasOwnProperty(profile_prop) ) {
-      profile_update_map[profile_prop].apply(this, eventData);
+      profile_update_map[profile_prop].call(this, eventData);
     }
-  });
+  }, this);
 };
 
 Contributor.prototype.getData = function() {
