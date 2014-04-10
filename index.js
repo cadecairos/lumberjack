@@ -46,7 +46,7 @@ var profile_update_map = {
     }
   },
   eventHost: function(eventData) {
-    if ( !this.eventHost && this.event_type === "create_event" ) {
+    if ( !this.eventHost && eventData.event_type === "create_event" ) {
       this.eventHost = true;
     }
   },
