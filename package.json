@@ -1,6 +1,6 @@
 {
   "name": "bucheron",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Contributor Model for Webmaker",
   "scripts": {
     "test": "jstest spec/*_spec.js"
