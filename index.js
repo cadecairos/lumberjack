@@ -34,8 +34,10 @@ var profile_update_map = {
     }
   },
   latestContribution: function(eventData) {
-    if (contribution_events.indexOf(eventData.event_type) !== -1) {
-      this.latestContribution = Date.now();
+    if (contribution_events.indexOf(eventData.event_type) !== -1 &&
+        new Date(eventData.timestamp).valueOf() >
+        (this.latestContribution ? new Date(this.latestContribution).valueOf() : 0)) {
+      this.latestContribution = eventData.timestamp;
     }
   },
   contributor: function(eventData) {
