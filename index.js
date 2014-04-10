@@ -50,6 +50,11 @@ var profile_update_map = {
       this.eventHost = true;
     }
   },
+  createdAt: function(eventData) {
+    if (eventData.event_type === "create_user") {
+      this.createdAt = eventData.timestamp;
+    }
+  },
   deletedAt: function(eventData) {
     if ( eventData.event_type === "delete_user" ) {
       this.deletedAt = Date.now();
@@ -67,7 +72,7 @@ var Contributor = function Contributor(profileData) {
   this.latestContribution = profileData.latestContribution || null;
   this.contributor = !!profileData.contributor;
   this.eventHost = !!profileData.eventHost;
-  this.createdAt = profileData.createdAt || Date.now();
+  this.createdAt = profileData.createdAt || null;
   this.deletedAt = profileData.deletedAt || null;
 };
 

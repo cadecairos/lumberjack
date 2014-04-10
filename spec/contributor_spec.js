@@ -31,8 +31,8 @@ JS.Test.describe('Profile', function() { with(this) {
       assertEqual(data.eventHost, false);
     }});
     it('Defaults createdAt', function() { with(this) {
-      assert(data.createdAt);
-      assert(typeof data.createdAt === "number");
+      assertNot(data.lastActive);
+      assertEqual(data.lastActive, null);
     }});
     it('Defaults deletedAt', function() { with(this) {
       assertNot(data.deletedAt);
@@ -106,6 +106,15 @@ JS.Test.describe('Profile', function() { with(this) {
       });
 
       assertEqual("2014-03-01T00:00:00.000Z", p.getData().latestContribution);
+    }});
+
+    it('createdAt', function() { with(this) {
+      p.updateProfile({
+        event_type: "create_user",
+        timestamp: "2014-01-01T00:00:00.000Z"
+      });
+
+      assertEqual("2014-01-01T00:00:00.000Z", p.getData().createdAt);
     }});
   }});
 }});
