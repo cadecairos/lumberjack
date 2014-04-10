@@ -57,7 +57,7 @@ var profile_update_map = {
   },
   deletedAt: function(eventData) {
     if ( eventData.event_type === "delete_user" ) {
-      this.deletedAt = Date.now();
+      this.deletedAt = eventData.timestamp;
     }
   }
 };
