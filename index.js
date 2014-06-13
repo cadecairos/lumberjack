@@ -28,6 +28,10 @@ var contribution_events = [
   {
     name: "create_event",
     type: "events"
+  },
+  {
+    name: "suggest_featured_resource",
+    type: "content"
   }
 ];
 

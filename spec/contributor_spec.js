@@ -126,5 +126,17 @@ JS.Test.describe('Bucheron', function() { with(this) {
 
       assertEqual("2014-01-01T00:00:00.000Z", p.getData().createdAt);
     }});
+
+    it('suggest_featured_resource', function() { with(this) {
+      p.updateProfile({
+        event_type: "suggest_featured_resource",
+        timestamp: "2014-06-01T00:00:00.000Z"
+      });
+
+      var d = p.getData();
+
+      assertEqual(true, d.contributor);
+      assertEqual("2014-06-01T00:00:00.000Z", d.latestContribution);
+    }});
   }});
 }});
